@@ -1,0 +1,99 @@
+{% extends "base.html" %} {% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="form-group" style="display: block;" id="profile_inforamtion">
+    <h3 align="center">Profile information</h3>
+    <label for="first_name">First Name: {{ current_user.first_name }}</label>
+    <br/>
+    <label for="last_name">Last Name: {{ current_user.last_name }}</label>
+    <br/>
+    <label for="last_name">Email: {{ current_user.email }}</label>
+    <br/>
+    <button type="button" class="btn btn-primary" onclick="change()">Change information</button>
+</div>
+
+<form method="post" style="display: none;" id="change_information">
+    <h3 align="center">Change information</h3>
+    <p align="center">Leave the field blank if you don't want to change</p>
+    <div class="form-group">
+        <label for="first_name">First Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="first_name"
+          name="first_name"
+          placeholder="Enter first name"
+        />
+    </div>
+    <div class="form-group">
+      <label for="last_name">Last Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="last_name"
+        name="last_name"
+        placeholder="Enter last name"
+      />
+    </div>
+    <div class="form-group">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          placeholder="Enter email"
+        />
+      </div>
+
+      <div>
+        <div class="form-check">
+          <input 
+            class="form-check-input"
+            type="checkbox" 
+            name="change_password" 
+            id="change_password"
+            onclick="disable()"
+          />
+          <label class="form-check-label" for="change_password">Change password</label>
+        </div>
+        <div class="form-group">
+          <label for="old_password">Old Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="old_password"
+            name="old_password"
+            placeholder="Enter old password"
+            disabled
+          />
+        </div>
+        <div class="form-group">
+          <label for="new_password">New Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="new_password"
+            name="new_password"
+            placeholder="Enter new password"
+            disabled
+          />
+        </div>
+        <div class="form-group">
+          <label for="new_password_confirm">New Password (Confirm)</label>
+          <input
+            type="password"
+            class="form-control"
+            id="new_password_confirm"
+            name="new_password_confirm"
+            placeholder="Enter new password"
+            disabled
+          />
+      </div>
+    </div>
+      {{ recaptcha }}
+    <br/>
+    <button type="submit" class="btn btn-primary">Change</button>
+</form>
+{% endblock %}
