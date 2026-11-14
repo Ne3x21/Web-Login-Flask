@@ -3,16 +3,19 @@ from flask_recaptcha import ReCaptcha
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
+from dotenv import load_dotenv
 
+
+load_dotenv()
 db = SQLAlchemy()
 DB_NAME = "database.db"
 
 def create_app():
     app = Flask(__name__)
     global recaptcha
-    app.config['SECRET_KEY'] = 'df0331cefc6c2b9a5d0208a726a5d1c0fd37324feba25506'
-    app.config['RECAPTCHA_SITE_KEY'] = '6Lciu2whAAAAAJf1HOw7_A4eAVZmsnliX4twhp_B'
-    app.config['RECAPTCHA_SECRET_KEY'] = '6Lciu2whAAAAADkpKUr_TIliN1it0r9kTFiu-TjR'
+    app.config['SECRET_KEY'] = 'SECRET_KEY'
+    app.config['RECAPTCHA_SITE_KEY'] = 'RECAPTCHA_SITE_KEY'
+    app.config['RECAPTCHA_SECRET_KEY'] = 'RECAPTCHA_SECRET_KEY'
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     recaptcha = ReCaptcha(app)
     db.init_app(app)
