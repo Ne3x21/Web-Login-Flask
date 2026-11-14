@@ -24,6 +24,7 @@ def home():
     return render_template("home.html", user=current_user)
 
 @views.route('/delete-note', methods=['POST'])
+@login_required
 def delete_note():
     note = json.loads(request.data)
     note_id = note['note_id']
