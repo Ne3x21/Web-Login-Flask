@@ -17,7 +17,7 @@ def login():
             if user:
                 if check_password_hash(user.password, password):
                     flash('Logged in successfully!', category='success')
-                    login_user(user, remember=True)
+                    login_user(new_user, remember=True)
                     return redirect(url_for('views.home'))
                 else:
                     flash('Incorrect password.', category='error')
@@ -54,7 +54,7 @@ def sign_up():
             elif len(last_name) < 2:
                 flash('Last name must be greater than 1 characters.', category='error')
             elif password != confirm_password:
-                flash('Password don\'t match.', category='eror')
+                flash('Password don\'t match.', category='error')
             elif len(password) < 7:
                 flash('Password must be at least 7 characters.', category='error')
             else:
@@ -92,14 +92,14 @@ def profile():
                 change = True
             else:
                 change = False
-   
+            change_psw = False
+            
             box = request.form.get('change_password')
 
             if box == 'on':
                 old_password = request.form.get('old_password')
                 new_password = request.form.get('new_password')
                 new_password_confirm  = request.form.get('new_password_confirm')
-                change_psw = False
                 if old_password != '':
                     if new_password != '':
                         if new_password_confirm != '':
@@ -126,7 +126,7 @@ def profile():
                 flash("Account data changed successfully!", category='success')
                 return redirect(url_for('auth.login'))
             if change_psw == True:
-                flash('Password changed successfully!', category='succes')
+                flash('Password changed successfully!', category='success')
                 return redirect(url_for('auth.login'))
         else:
             flash('ReCaptcha required!', category='error')
